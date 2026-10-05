@@ -1015,6 +1015,56 @@ a{color:var(--teal-ink)}
 /* zoom on Zita */
 .zita-photo{overflow:hidden}
 .zita-photo img{transform:scale(1.5);transform-origin:62% 35%}
+
+/* graphics: pump bottle, step line, NSF seal */
+.math-card.has-art{position:relative}
+.pump-art{position:absolute;top:26px;right:22px;width:48px;height:auto;color:var(--teal-ink);overflow:visible}
+.pump-liquid{fill:rgba(76,217,214,.55);transform-box:fill-box;transform-origin:bottom}
+.pump-head{transform-box:fill-box}
+.pump-drop{opacity:0}
+.has-art.drawn .pump-liquid{animation:drain 7s ease-in-out infinite}
+.has-art.drawn .pump-head{animation:press 7s ease-in-out infinite}
+.has-art.drawn .pump-drop{animation:dropfall 7s ease-in infinite}
+@keyframes drain{0%{transform:scaleY(1)}85%{transform:scaleY(.22)}92%{transform:scaleY(.22);opacity:1}97%{opacity:0}98%{transform:scaleY(1);opacity:0}100%{transform:scaleY(1);opacity:1}}
+@keyframes press{0%,8%,100%{transform:translateY(0)}12%,16%{transform:translateY(5px)}20%,30%{transform:translateY(0)}34%,38%{transform:translateY(5px)}42%,56%{transform:translateY(0)}60%,64%{transform:translateY(5px)}68%,100%{transform:translateY(0)}}
+@keyframes dropfall{0%,12%{opacity:0;transform:translateY(0)}16%{opacity:1;transform:translateY(0)}26%{opacity:0;transform:translateY(34px)}38%{opacity:0}40%{opacity:0;transform:translateY(0)}42%{opacity:1;transform:translateY(0)}52%{opacity:0;transform:translateY(34px)}62%{opacity:0}64%{opacity:1;transform:translateY(0)}74%{opacity:0;transform:translateY(34px)}100%{opacity:0}}
+.steps-list{position:relative}
+.steps-list::before,.steps-list::after{content:"";position:absolute;left:25px;top:48px;bottom:48px;width:2px;border-radius:1px}
+.steps-list::before{background:var(--line)}
+.steps-list::after{background:var(--teal-ink);transform:scaleY(0);transform-origin:top;transition:transform 1.6s cubic-bezier(.65,0,.35,1) .2s}
+.steps-list.drawn::after{transform:scaleY(1)}
+.step-num{position:relative;z-index:1;background:var(--mist);align-self:start;text-align:center;border-radius:2px}
+.nsf-badge img{transform-origin:center}
+.nsf-badge.drawn img{animation:stamp .9s cubic-bezier(.2,1.4,.4,1) both}
+.nsf-badge.drawn{animation:sealglow 1.6s .5s ease-out 1}
+@keyframes stamp{0%{opacity:0;transform:scale(1.9) rotate(-14deg)}60%{opacity:1;transform:scale(.94) rotate(2deg)}100%{opacity:1;transform:none}}
+@keyframes sealglow{0%{box-shadow:0 0 0 0 rgba(76,217,214,.55)}100%{box-shadow:0 0 0 16px rgba(76,217,214,0)}}
+@media(min-width:960px){.steps-list::before,.steps-list::after{left:22px}}
+
+
+/* revenue calculator */
+.calc{margin-top:28px;display:grid;grid-template-columns:1fr;gap:28px;background:var(--mist);border:1px solid var(--line);border-top:3px solid var(--teal-ink);border-radius:var(--r-md);padding:28px 24px}
+.calc-inputs{display:flex;flex-direction:column;gap:22px}
+.calc-row{display:grid;grid-template-columns:1fr auto;gap:8px 12px;font-family:var(--font-body);font-size:14px;color:var(--ink-2)}
+.calc-row b{font-family:var(--font-display);font-size:18px;color:var(--ink);letter-spacing:-.01em}
+.calc-row input{grid-column:1/-1;width:100%;margin:0;height:28px;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer}
+.calc-row input::-webkit-slider-runnable-track{height:4px;background:var(--line);border-radius:2px}
+.calc-row input::-moz-range-track{height:4px;background:var(--line);border-radius:2px}
+.calc-row input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-8px;background:var(--teal-ink);border:3px solid #fff;border-radius:2px;box-shadow:0 1px 4px rgba(10,13,20,.3)}
+.calc-row input::-moz-range-thumb{width:14px;height:14px;background:var(--teal-ink);border:3px solid #fff;border-radius:2px;box-shadow:0 1px 4px rgba(10,13,20,.3)}
+.calc-row input:focus-visible{outline:2px solid var(--teal-ink);outline-offset:4px}
+.calc-out{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.calc-stat{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:18px 16px}
+.calc-stat span{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(28px,5vw,40px);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+.calc-stat small{display:block;margin-top:8px;font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;color:var(--ink-2)}
+.calc-main{grid-column:1/-1;background:var(--ink);border-color:var(--ink)}
+.calc-main span{color:var(--cbx-teal);font-size:clamp(40px,8vw,60px)}
+.calc-main small{color:#fff}
+.calc-note{grid-column:1/-1;margin:0;font-size:12px;line-height:1.5;color:var(--ink-2)}
+@media(min-width:900px){
+  .calc{grid-template-columns:1fr 1.1fr;gap:48px;padding:36px 36px;align-items:center}
+  .calc-note{grid-column:1/-1}
+}
 </style>
 </head>
 <body>
@@ -1176,7 +1226,15 @@ a{color:var(--teal-ink)}
     <h2 class="section-headline">HOW CAN CASCADE CBX SPORT SUPPORT SPA REVENUE?</h2>
     <p class="section-body">Cascade can give your spa two possible revenue streams. You can offer the Pump Bottle as a treatment enhancement and make the Pump Bottle or Roll-On available for take-home retail. Based on Cascade&rsquo;s illustrative model, one Pump Bottle can support about 20 to 33 treatment enhancements when three to five pumps are used per service.</p>
     <div class="math-grid">
-      <div class="math-card">
+      <div class="math-card has-art">
+        <svg class="pump-art" viewBox="0 0 64 112" aria-hidden="true" focusable="false">
+          <defs><clipPath id="bottleClip"><rect x="14" y="40" width="32" height="68" rx="3"/></clipPath></defs>
+          <g clip-path="url(#bottleClip)"><rect class="pump-liquid" x="14" y="40" width="32" height="68"/></g>
+          <rect x="14" y="40" width="32" height="68" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+          <rect x="22" y="31" width="16" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <g class="pump-head"><rect x="28" y="16" width="4" height="15" fill="currentColor"/><rect x="19" y="10" width="26" height="6" rx="1.5" fill="currentColor"/><rect x="45" y="11" width="11" height="4" fill="currentColor"/></g>
+          <circle class="pump-drop" cx="55" cy="18" r="2.2" fill="currentColor"/>
+        </svg>
         <div class="math-title">Pumps Per Bottle</div>
         <div class="math-num"><span><span class="count" data-to="100">100</span></span></div>
         <div class="math-desc">Usable pumps of Cascade CBX Sport per 3.4 oz bottle, designed for professional service application.</div>
@@ -1191,6 +1249,19 @@ a{color:var(--teal-ink)}
         <div class="math-num">$<span><span class="count" data-to="1650" data-comma="1">1,650</span></span></div>
         <div class="math-desc">Up to $1,650 in illustrative gross revenue generated per bottle, before any additional take-home retail sales.</div>
       </div>
+    </div>
+    <div class="calc" id="calc">
+      <div class="calc-inputs">
+        <label class="calc-row"><span>Massages per week</span><b id="c-v1">40</b><input type="range" id="c-1" min="10" max="200" step="5" value="40"></label>
+        <label class="calc-row"><span>Treatment upgrade</span><b id="c-v2">$40</b><input type="range" id="c-2" min="30" max="50" step="5" value="40"></label>
+        <label class="calc-row"><span>Guests who add the enhancement</span><b id="c-v3">30%</b><input type="range" id="c-3" min="10" max="80" step="5" value="30"></label>
+      </div>
+      <div class="calc-out">
+        <div class="calc-stat"><span id="c-o1">0</span><small>Treatment enhancements per month</small></div>
+        <div class="calc-stat"><span id="c-o2">0</span><small>Pump Bottles per month</small></div>
+        <div class="calc-stat calc-main"><span id="c-o3">$0</span><small>Illustrative gross revenue per month, before take-home sales</small></div>
+      </div>
+      <p class="calc-note">Assumes 25 treatment enhancements per Pump Bottle, or about 4 pumps per service. Gross revenue is not the same as net profit.</p>
     </div>
     <div class="quote-row"><figure class="quote quote-wide"><blockquote>&ldquo;We get a lot of value out of each pump bottle, so it&rsquo;s a great business for us.&rdquo;</blockquote><figcaption><strong>Zita</strong><span>Henderson Luxury Beach Resort &amp; Spa</span></figcaption></figure></div>
     <p class="section-body math-copy math-first">Estimated product offset after just 2 add-on treatments.</p>
@@ -1351,6 +1422,33 @@ document.documentElement.classList.add('js');
   v.addEventListener('timeupdate',function(){if(v.duration&&v.currentTime>v.duration-0.1&&!v.loop){v.currentTime=0;go()}});
   document.addEventListener('visibilitychange',function(){if(!document.hidden)go()});
   window.addEventListener('click',go,{once:true});window.addEventListener('touchstart',go,{once:true,passive:true});
+})();
+</script>
+<script>
+(function(){
+  var t=document.querySelectorAll('.steps-list,.nsf-badge,.math-card.has-art');
+  if(!t.length)return;
+  if(!('IntersectionObserver' in window)){t.forEach(function(x){x.classList.add('drawn')});return}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('drawn');io.unobserve(x.target)}})},{threshold:.35});
+  t.forEach(function(x){io.observe(x)});
+})();
+</script>
+<script>
+(function(){
+  var a=document.getElementById('c-1'),b=document.getElementById('c-2'),c=document.getElementById('c-3');
+  if(!a)return;
+  function f(n){return n.toLocaleString('en-US')}
+  function calc(){
+    var m=+a.value,pr=+b.value,at=+c.value/100;
+    var up=Math.round(m*4.33*at),bottles=Math.ceil(up/25),rev=up*pr;
+    document.getElementById('c-v1').textContent=m;
+    document.getElementById('c-v2').textContent='$'+pr;
+    document.getElementById('c-v3').textContent=Math.round(at*100)+'%';
+    document.getElementById('c-o1').textContent=f(up);
+    document.getElementById('c-o2').textContent=f(bottles);
+    document.getElementById('c-o3').textContent='$'+f(rev);
+  }
+  [a,b,c].forEach(function(x){x.addEventListener('input',calc)});calc();
 })();
 </script>
 </body>
